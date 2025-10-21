@@ -1,0 +1,20 @@
+IMAGE_NAME = sentiment-api
+CONTAINER_NAME = sentiment-api-container
+
+.PHONY: build run stop logs clean
+
+build:
+	docker build -t $(IMAGE_NAME) .
+
+run:
+	docker run -d -p 8000:8000 --name $(CONTAINER_NAME) $(IMAGE_NAME)
+
+stop:
+	docker stop $(CONTAINER_NAME) || true
+	docker rm $(CONTAINER_NAME) || true
+
+logs:
+	docker logs -f $(CONTAINER_NAME)
+
+clean: stop
+	docker rmi $(IMAGE_NAME) || true
