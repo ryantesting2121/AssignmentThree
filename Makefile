@@ -18,3 +18,4 @@ logs:
 
 clean: stop
 	docker rmi $(IMAGE_NAME) || true
+
